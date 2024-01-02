@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "simplyhomes",
+  "version": "${version}",
+
+  "name": "Simply Homes",
+  "description": "A server-side mod to add support to the classic /home.",
+  "authors": [
+    "etery"
+  ],
+  "contact": {
+    "homepage": "https://github.com/eteryi",
+    "sources": ""
+  },
+
+  "license": "CC0-1.0",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "cross.simplyhomes.SimpleHomes"
+    ]
+  },
+  "mixins": [
+		"simplyhomes.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.13.3"
+  },
+  "suggests": {
+  }
+}

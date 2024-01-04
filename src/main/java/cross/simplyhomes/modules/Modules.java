@@ -9,6 +9,7 @@ public class Modules {
 	public enum ID {
 		TPA("tpa"),
 		LUA("lua"),
+		WARP("warp"),
 		HOME("home");
 
 		public final String id;

@@ -1,5 +1,6 @@
 package cross.simplyhomes.utils;
 
+import cross.simplyhomes.test.io.LuaCommand;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
@@ -42,6 +43,30 @@ public class TCommands {
 			@Override
 			public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
 				commandSender.sendMessage(TextFormatting.RED + " [] > You didn't use /" + aliases[0] + " correctly");
+			}
+		};
+
+		registry.add(c);
+		if (commandRegistry != null) {
+			commandRegistry.add(c);
+		}
+	}
+	public void register(LuaCommand command) {
+		if (command == null) return;
+		Command c = new Command(command.name) {
+			@Override
+			public boolean execute(CommandHandler commandHandler, CommandSender commandSender, String[] strings) {
+				return command.getCommand().run(commandSender, commandHandler, strings);
+			}
+
+			@Override
+			public boolean opRequired(String[] strings) {
+				return false;
+			}
+
+			@Override
+			public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
+				commandSender.sendMessage(TextFormatting.RED + " [] > You didn't use /" + command.name + " correctly");
 			}
 		};
 

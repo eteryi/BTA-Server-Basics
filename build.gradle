@@ -96,6 +96,10 @@ dependencies {
 	implementation("org.apache.logging.log4j:log4j-core:${log4jVersion}")
 	implementation("org.apache.logging.log4j:log4j-api:${log4jVersion}")
 	implementation("org.apache.logging.log4j:log4j-1.2-api:${log4jVersion}")
+
+	implementation('party.iroiro.luajava:luajava:3.5.0')
+	implementation('party.iroiro.luajava:luajit:3.5.0')
+	runtimeOnly('party.iroiro.luajava:luajit-platform:3.5.0:natives-desktop')
 }
 
 java {

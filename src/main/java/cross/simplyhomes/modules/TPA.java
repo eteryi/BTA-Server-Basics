@@ -44,8 +44,6 @@ public class TPA implements Module {
 				@Override
 				public void run() {
 					while (true) {
-						System.out.println(System.currentTimeMillis() - timeSent);
-
 						if (System.currentTimeMillis() - timeSent >= MAXIMUM_TPA_TIME * 1000) {
 							TPA tpa = (TPA) SimpleHomes.MODULE_REGISTRY.getModule(Modules.ID.TPA);
 							tpa.timeOut(request);

@@ -13,6 +13,7 @@ public class HomeCommand implements TCommand {
 	@Override
 	public boolean run(CommandSender sender, CommandHandler handler, String[] args) {
 		Homes homeModule = (Homes) SimpleHomes.MODULE_REGISTRY.getModule(Modules.ID.HOME);
+
 		if (args.length <= 0) {
 			sender.sendMessage(TextFormatting.ORANGE + "Your Homes: ");
 			for (Homes.Home h : homeModule.getHomesFromUser(sender.getName())) {

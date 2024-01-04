@@ -11,8 +11,10 @@ import java.util.*;
 
 public class Homes implements Module {
 	private HashMap<String, HashMap<String, Home>> homes;
+	public final byte MAX_HOMES;
 	public Homes() {
 		this.homes = new HashMap<>();
+		this.MAX_HOMES = 20;
 	}
 
 	@Override

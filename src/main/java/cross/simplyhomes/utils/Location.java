@@ -24,6 +24,7 @@ public class Location {
 		return String.format("(x: %.1f, y: %.1f, z: %.1f)", this.x, this.y, this.z);
 	}
 
+
 	private static void teleport(EntityPlayer p1, Integer dimension, double x, double y, double z) {
 		if (p1 instanceof EntityPlayerMP) {
 			EntityPlayerMP p1MP = (EntityPlayerMP)p1;

@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class Modules {
 	public enum ID {
 		TPA("tpa"),
+		LUA("lua"),
 		HOME("home");
 
 		public final String id;

@@ -20,6 +20,19 @@ public class Modules {
 		public String toString() {
 			return "module:" + id;
 		}
+
+		public Module getModule() {
+			switch (this) {
+                case TPA:
+					return new TPA();
+				case HOME:
+					return new Homes();
+				case WARP:
+					return new Warps();
+				default:
+					return null;
+			}
+		}
 	}
 
 	private HashMap<ID, Module> active;

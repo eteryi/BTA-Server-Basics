@@ -12,6 +12,8 @@ import net.minecraft.core.net.command.TextFormatting;
 public class SetHomeCommand implements TCommand {
 	@Override
 	public boolean run(CommandSender sender, CommandHandler handler, String[] args) {
+		if (!sender.isPlayer()) return false;
+
 		if (args.length <= 0) {
 			sender.sendMessage("/sethome <name>");
 			return true;
@@ -20,7 +22,12 @@ public class SetHomeCommand implements TCommand {
 
 		Homes.Home h = new Homes.Home(args[0], Location.from(sender.getPlayer()), sender.getName());
 		if (homeModule.getHomeFromUser(sender.getName(), h.name) != null) {
-			sender.sendMessage(TextFormatting.RED + "You already have a home with that name.");
+			sender.sendMessage(TextFormatting.RED + " > You already have a home with that name.");
+			return true;
+		}
+
+		if (homeModule.getHomesFromUser(sender.getName()).size() >= homeModule.MAX_HOMES) {
+			sender.sendMessage(TextFormatting.RED + " > You have already hit the limit of homes you can have");
 			return true;
 		}
 

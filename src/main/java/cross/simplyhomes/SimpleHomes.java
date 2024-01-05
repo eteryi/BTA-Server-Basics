@@ -1,5 +1,6 @@
 package cross.simplyhomes;
 
+import cross.simplyhomes.config.Config;
 import cross.simplyhomes.modules.Modules;
 import cross.simplyhomes.modules.TPA;
 import cross.simplyhomes.modules.Warps;
@@ -14,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
+import java.io.File;
+
 
 public class SimpleHomes implements ModInitializer, GameStartEntrypoint, RecipeEntrypoint {
     public static final String MOD_ID = "simplyhomes";
@@ -21,7 +24,7 @@ public class SimpleHomes implements ModInitializer, GameStartEntrypoint, RecipeE
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static final TCommands COMMAND_REGISTRY = new TCommands();
 	public static final Modules MODULE_REGISTRY = new Modules();
-
+	public static final Config CONFIG = new Config();
 	public static TCommands getCommandRegistry() {
 		return COMMAND_REGISTRY;
 	}
@@ -30,7 +33,7 @@ public class SimpleHomes implements ModInitializer, GameStartEntrypoint, RecipeE
 
     @Override
     public void onInitialize() {
-		System.out.println("Hello ???");
+		System.out.println("Basics ");
 		MODULE_REGISTRY.register(new Homes());
 		MODULE_REGISTRY.register(new TPA());
 		MODULE_REGISTRY.register(new Warps());

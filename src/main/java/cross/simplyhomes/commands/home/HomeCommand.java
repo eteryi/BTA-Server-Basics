@@ -12,10 +12,11 @@ import net.minecraft.server.entity.player.EntityPlayerMP;
 public class HomeCommand implements TCommand {
 	@Override
 	public boolean run(CommandSender sender, CommandHandler handler, String[] args) {
+		if (!sender.isPlayer()) return false;
 		Homes homeModule = (Homes) SimpleHomes.MODULE_REGISTRY.getModule(Modules.ID.HOME);
 
 		if (args.length <= 0) {
-			sender.sendMessage(TextFormatting.ORANGE + "Your Homes: ");
+			sender.sendMessage(TextFormatting.ORANGE + "Your Homes" + TextFormatting.LIGHT_GRAY + "(" + homeModule.getHomesFromUser(sender.getName()).size() + "/" + homeModule.MAX_HOMES + ")" + TextFormatting.ORANGE + ": ");
 			for (Homes.Home h : homeModule.getHomesFromUser(sender.getName())) {
 				sender.sendMessage(TextFormatting.ORANGE + "    > " + h.name + " " + h.location);
 			}

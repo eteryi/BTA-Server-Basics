@@ -1,5 +1,6 @@
 package cross.simplyhomes.modules;
 
+import cross.simplyhomes.commands.home.DelHomeCommand;
 import cross.simplyhomes.commands.home.HomeCommand;
 import cross.simplyhomes.commands.home.SetHomeCommand;
 import cross.simplyhomes.commands.tpa.TPACommand;
@@ -10,7 +11,7 @@ import cross.simplyhomes.utils.TCommands;
 import java.util.*;
 
 public class Homes implements Module {
-	private HashMap<String, HashMap<String, Home>> homes;
+	private HashMap<String, ArrayList<Home>> homes;
 	public final byte MAX_HOMES;
 	public Homes() {
 		this.homes = new HashMap<>();
@@ -21,6 +22,7 @@ public class Homes implements Module {
 	public boolean registerCommands(TCommands registry) {
 		registry.register(new HomeCommand(), "home", "h");
 		registry.register(new SetHomeCommand(), "sethome", "sh");
+		registry.register(new DelHomeCommand(), "delhome", "dh");
 
 		return true;
 	}
@@ -42,26 +44,37 @@ public class Homes implements Module {
 		}
 	}
 
-	private HashMap<String, Home> getValue(String user) {
-		HashMap<String, Home> h1 = homes.get(user);
+	private ArrayList<Home> getValue(String user) {
+		ArrayList<Home> h1 = homes.get(user);
 		if (h1 == null) {
-			h1 = new HashMap<>();
+			h1 = new ArrayList<>();
 			homes.put(user, h1);
 		}
 		return h1;
 	}
 	public ArrayList<Home> getHomesFromUser(String user) {
-		HashMap<String, Home> userHomes = getValue(user);
-		return new ArrayList<>(userHomes.values());
+		ArrayList<Home> userHomes = getValue(user);
+		return new ArrayList<>(userHomes);
 	}
 
 	public void register(String user, Home h) {
-		HashMap<String, Home> userHomes = getValue(user);
-		userHomes.put(h.name, h);
+		ArrayList<Home> userHomes = getValue(user);
+		userHomes.add(h);
 	}
 
 	public Home getHomeFromUser(String user, String homeName) {
-		HashMap<String, Home> userHomes = getValue(user);
-		return userHomes.get(homeName);
+		ArrayList<Home> userHomes = getValue(user);
+
+		for (Home i : userHomes) {
+			if (i.name.equals(homeName)) {
+				return i;
+			}
+		}
+		return null;
+	}
+
+	public void remove(String user, Home h) {
+		ArrayList<Home> homes = getValue(user);
+		homes.remove(h);
 	}
 }

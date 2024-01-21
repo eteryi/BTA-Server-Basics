@@ -4,7 +4,8 @@
   "package": "cross.simplyhomes.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "CommandMixin"
+    "CommandMixin",
+    "PlayerListMixin"
   ],
   "client": [
   ],

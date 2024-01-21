@@ -1,6 +1,7 @@
 package cross.simplyhomes.utils;
 
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 
 public class Location {
@@ -16,12 +17,40 @@ public class Location {
 		this.dimension = dimension;
 	}
 
+	private static TextFormatting getColorFromDimension(int dim) {
+		switch (dim) {
+			case 0:
+				return TextFormatting.LIME;
+			case 1:
+				return TextFormatting.RED;
+			case 2:
+				return TextFormatting.YELLOW;
+			default:
+				return TextFormatting.LIGHT_GRAY;
+		}
+	}
+
+	private static String getDimension(int dim) {
+		switch (dim) {
+			case 0:
+				return "Overworld";
+			case 1:
+				return "Nether";
+			case 2:
+				return "End";
+			default:
+				return "Unknown";
+		}
+	}
+
+
+
 	public void teleport(EntityPlayerMP playerMP) {
 		teleport(playerMP, this.dimension, this.x, this.y, this.z);
 	}
 
 	public String toString() {
-		return String.format("(x: %.1f, y: %.1f, z: %.1f)", this.x, this.y, this.z);
+		return String.format("(x: %.1f, y: %.1f, z: %.1f) " + getColorFromDimension(this.dimension) + "[" + getDimension(this.dimension) + "]", this.x, this.y, this.z);
 	}
 
 

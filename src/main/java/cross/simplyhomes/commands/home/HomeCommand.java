@@ -16,14 +16,14 @@ public class HomeCommand implements TCommand {
 		Homes homeModule = (Homes) SimpleHomes.MODULE_REGISTRY.getModule(Modules.ID.HOME);
 
 		if (args.length <= 0) {
-			sender.sendMessage(TextFormatting.ORANGE + "Your Homes" + TextFormatting.LIGHT_GRAY + "(" + homeModule.getHomesFromUser(sender.getName()).size() + "/" + homeModule.MAX_HOMES + ")" + TextFormatting.ORANGE + ": ");
-			for (Homes.Home h : homeModule.getHomesFromUser(sender.getName())) {
-				sender.sendMessage(TextFormatting.ORANGE + "    > " + h.name + " " + h.location);
+			sender.sendMessage(TextFormatting.ORANGE + " - Your Homes " + TextFormatting.LIGHT_GRAY + "(" + homeModule.getHomesFromUser(sender.getPlayer().username).size() + "/" + homeModule.MAX_HOMES + ")" + TextFormatting.ORANGE + ": ");
+			for (Homes.Home h : homeModule.getHomesFromUser(sender.getPlayer().username)) {
+				sender.sendMessage(TextFormatting.ORANGE + "     > " + h.name + " " + h.location);
 			}
 			return true;
 		}
 
-		Homes.Home h = homeModule.getHomeFromUser(sender.getName(), args[0]);
+		Homes.Home h = homeModule.getHomeFromUser(sender.getPlayer().username, args[0]);
 		if (h == null) {
 			sender.sendMessage(TextFormatting.RED + " > Home not found");
 			return true;

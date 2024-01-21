@@ -8,11 +8,9 @@ import cross.simplyhomes.modules.Warps;
 import org.apache.logging.log4j.core.util.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONWriter;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class Config {
@@ -72,18 +70,21 @@ public class Config {
 			try {
 				f.createNewFile();
 			} catch (IOException e) {
+				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
-
-			try (FileWriter writer = new FileWriter(f)) {
-				JSONObject configObject = new JSONObject();
-				for (Modules.ID id : Modules.ID.values()) {
-					configObject.put(id.toString(), true);
-				}
-				configObject.write(writer);
-			} catch (IOException e) {
-				throw new RuntimeException(e);
+		}
+		try (FileWriter writer = new FileWriter(f)) {
+			System.out.println("file writer");
+			JSONObject configObject = new JSONObject();
+			System.out.println("jason");
+			for (Modules.ID id : Modules.ID.values()) {
+				configObject.put(id.toString(), true);
 			}
+			configObject.write(writer);
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -106,6 +107,7 @@ public class Config {
 			f.createNewFile();
 			array.write(writer);
 		} catch (IOException e) {
+			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 	}
@@ -159,23 +161,13 @@ public class Config {
 	public void updateHomes(String username, ArrayList<Homes.Home> homes) {
 		Runnable r = () -> {
             File playerFile = getPlayerFile(username);
-			JSONObject playerData;
-
-			try (FileReader reader = new FileReader(playerFile)) {
-				String jsonString = IOUtils.toString(reader);
-				playerData = new JSONObject(jsonString);
-			} catch (IOException e) {
-				e.printStackTrace();
-				return;
-			}
+			JSONObject playerData = new JSONObject();
 
 			JSONArray homesArr = new JSONArray();
 			for (Homes.Home h : homes) {
 				JSONObject obj = Homes.Home.serialize(h);
 				homesArr.put(obj);
 			}
-
-			playerData.remove("homes");
 			playerData.put("homes", homesArr);
 
 			try (FileWriter writer = new FileWriter(playerFile)) {
@@ -199,6 +191,8 @@ public class Config {
 
 		if (!configFile.exists()) Config.writeConfig(configFile);
 		if (!warpFile.exists()) this.writeWarp(warpFile);
+		System.out.println("but this does");
+
 
 		JSONObject configObject = null;
 		try (FileReader reader = new FileReader(configFile)) {

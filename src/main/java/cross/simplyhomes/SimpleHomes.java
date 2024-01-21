@@ -34,6 +34,7 @@ public class SimpleHomes implements ModInitializer, GameStartEntrypoint, RecipeE
     @Override
     public void onInitialize() {
 		System.out.println("[Basics] Basics has been loaded");
+
 		CONFIG.init();
 
 		if (CONFIG.isModuleActive(Modules.ID.HOME)) {

@@ -1,6 +1,6 @@
-# Simply Homes
+# Simply Basics
 
-A Babric server-side mod made to support the classic /home functionality from recent plugins.
+A Babric server-side mod made to support the classic serverside QoL functionalities from plugins such as Essentials.
 
 
 ## Commands

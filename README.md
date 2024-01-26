@@ -26,7 +26,7 @@ You can disable certain features using the config, that you can find on the /con
 | --- | ------ |
 | "modules:tpa" | Enables or disables the TPA part of the plugin |
 | "modules:warp" | Enables or disables the Warp part of the plugin |
-| "modules:home" | Enables or disables the Warp part of the plugin |
+| "modules:home" | Enables or disables the Home part of the plugin |
 | "modules:lua" | Experimental feature, not yet added |
 
 To disable any of them just simply switch the "true" to "false", vice versa if you want to enable them.
